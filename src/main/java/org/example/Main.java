@@ -1,22 +1,39 @@
 package org.example;
 
-import java.util.Scanner;
+import java.util.ArrayList;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
 
-        String name = "kira";
+        double balance = 1000.0;
+        ArrayList<String> transactionHistory = new ArrayList<>();
 
-        System.out.println("Hola java");
+        deposit(500, balance, transactionHistory);
+        withdraw(100, balance, transactionHistory);
 
-        try{
-            int result = 10/0;
-        } catch (ArithmeticException e){
-            System.out.println("no se puede dividir por cero mr "+ name);
+        System.out.println("Balance final: " + balance);
+        for (String transaction : transactionHistory) {
+            System.out.println(transaction);
         }
+    }
 
+    public static void deposit(double amount, double balance, ArrayList<String> transactionHistory) {
+        balance += amount;
+        transactionHistory.add("Deposited: $" + amount);
+    }
+
+    public static boolean withdraw(double amount, double balance, ArrayList<String> transactionHistory) {
+        if (balance >= amount) {
+            balance -= amount;
+            transactionHistory.add("Withdrew: $" + amount);
+            return true;
+        } else {
+            System.out.println("Insufficient funds");
+            return false;
+        }
     }
 }
+
+
+
+
